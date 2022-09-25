@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /***
  * Реализуйте классовую модель автомобиля или любой другой близкой вам предметной области. Модель должна включать:
  * Иерархия классов (родитель и не менее 2 потомков) .
@@ -19,5 +21,14 @@ public class Animal {
 
   public void sayMyParametre(){
     System.out.println("Я из семейства " + type + ", я " + petOrWild + " и я " + size + " размеров, место рождения - " + Animal.location);
+  }
+
+  public static void main(String[] args) {
+    ArrayList<String> animals = new ArrayList<String>();
+    animals.add("Псовые");
+    animals.add("Кошачьи");
+    animals.add("Гиеновые");
+    animals.add("Медвежьи");
+    animals.forEach( (n) -> { System.out.println(n); } );
   }
 }

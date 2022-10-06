@@ -1,75 +1,54 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 public class Student {
-
   String name;
   String group;
   int course;
   Map<String, Integer> grades;
 
-  public Student(String name, String group, int course, HashMap<String, Integer> grades) {
-    this.name = name;
-    this.group = group;
-    this.course = course;
-    this.grades = grades;
-  }
+  static class Builder {
+    String name;
+    String group;
+    int course;
+    Map<String, Integer> grades;
+    private Student student;
 
-  public String getName() {
-    return name;
-  }
+    public void localStudent(Builder builder) {
+      this.name = builder.name;
+      this.group = builder.group;
+      this.course = builder.course;
+      this.grades = builder.grades;
+    }
 
-  public String getGroup() {
-    return group;
-  }
+    public Builder() {
+      student = new Student();
+    }
 
-  public void setGroup(String group) {
-    this.group = group;
-  }
+    public Student.Builder withName(String name) {
+      student.name = name;
+      return this;
+    }
 
-  public int getCourse() {
-    return course;
-  }
+    public Student.Builder withGroup(String group) {
+      student.group = group;
+      return this;
+    }
 
-  public void setCourse(int course) {
-    this.course = course;
-  }
+    public Student.Builder withCourse(int course) {
+      student.course = course;
+      return this;
+    }
 
-  public Map<String, Integer> getGrades() {
-    return grades;
+    public Student build() {
+      return student;
+    }
   }
 
   public static void main(String[] args) {
-    Student student1 = new Student("Miu", "1", 1, new HashMap<>(
-        Map.of("Math", 3, "Franch", 3, "Sport", 2, "Music", 2))
-    );
-
-    Student student2 = new Student("Mour", "2", 4, new HashMap<>(
-        Map.of("Math", 3, "Franch", 3, "Sport", 3, "Music", 3))
-    );
-
-    Student student3 = new Student("Danna", "A1", 1, new HashMap<>(
-        Map.of("Math", 5, "Franch", 3, "Sport", 5, "Music", 3))
-    );
-
-    List<Student> studentsBefore = new ArrayList<>();
-
-    studentsBefore.add(student1);
-    studentsBefore.add(student2);
-    studentsBefore.add(student3);
-    printStudents(studentsBefore, 4);
-  }
-
-  public static void printStudents(List<Student> students, int course) {
-    ListIterator<Student> iterator = students.listIterator();
-    while (iterator.hasNext()) {
-      Student student = iterator.next();
-      if (course == student.getCourse()) {
-        System.out.println("Студент + " + course + " курса - " + student.getName());
-      }
-    }
+    Student student = new Student.Builder()
+        .withName("Miu")
+        .withGroup("a")
+        .withCourse(1)
+        .build();
   }
 }
